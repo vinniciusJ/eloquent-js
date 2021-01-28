@@ -18,4 +18,27 @@ const findSolution = target => {
     return find(1, '1')
 }
 
-console.log(findSolution(24))
+findSolution(24)
+
+// Declarar funções com nomes óbvios
+
+const zeroPad = (number = 0, width = 0) => {
+    let string = String(number)
+
+    while(string.length < width){
+        string = `0${string}`
+    }
+
+    return string
+} 
+
+const printFarmInventory = (...args) => {
+    args.forEach(arg => {
+        const [ key ] = Object.keys(arg)
+
+        console.log(`${zeroPad(arg[key], 3)} ${key[0].toUpperCase() + key.substr(1)}`)
+    })
+}
+
+printFarmInventory({ cows: 5 }, { chickens: 10 }, { pigs: 9 })
+
