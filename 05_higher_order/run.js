@@ -18,3 +18,5 @@ console.log('121 =>', characterScript(121))
 
 console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
 //console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
+
+console.log(dominantDirection("Hey, مساء الخير"))

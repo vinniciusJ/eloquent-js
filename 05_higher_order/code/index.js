@@ -51,3 +51,25 @@ function textScripts(text){
 
     return scripts.map(({ name, count }) => `${Math.round(count * 100 / total)}% ${name}`).join(', ')
 }
+
+function dominantDirection(text){
+    const scripts = countBy(text, char => {
+        let script = characterScript(char.codePointAt(0))
+
+        return script ? script.name : 'none'
+    })
+    .filter(({ name }) => name != 'none')
+
+    const selectedScripts = scripts.map(script =>
+        SCRIPTS.filter(s => s.name === script.name)
+            .map(({ direction }) => ({ direction, count: script.count })))
+            .flat()
+
+    const sumTotalDirections = direction => 
+        selectedScripts.filter(s => s.direction == direction).map(s => s.count)
+
+    const totalLTR = sumTotalDirections('ltr') 
+    const totalRTL = sumTotalDirections('rtl')
+
+    console.log(totalRTL > totalLTR ? 'rtl' : 'ltr')
+}
