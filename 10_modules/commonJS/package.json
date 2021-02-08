@@ -1,0 +1,16 @@
+{
+  "name": "commonjs",
+  "version": "1.0.0",
+  "description": "'Eloquent JS - Chapter 10'",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "start": "node index.js"
+  },
+  "author": "Vinicius de Oliveira Jimenez",
+  "license": "ISC",
+  "dependencies": {
+    "date-names": "^0.1.13",
+    "ordinal": "^1.0.3"
+  }
+}

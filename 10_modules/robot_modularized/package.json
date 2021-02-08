@@ -1,0 +1,15 @@
+{
+  "name": "roboto-modularized",
+  "version": "1.0.0",
+  "description": "Rewriting the robot code of the chapter 07",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Vinicius de Oliveira Jimenez",
+  "license": "ISC",
+  "dependencies": {
+    "dijkstrajs": "^1.0.1"
+  }
+}
