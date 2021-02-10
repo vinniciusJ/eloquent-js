@@ -51,6 +51,12 @@ Group.prototype[Symbol.iterator] = function(){
     return new GroupIterator(this)
 }
 
+// Criando um iterator com generators
+
+Group.prototype[Symbol.iterator] = function*(){
+    for(let member of this.members) yield member
+}
+
 const group = Group.from([10, 20])
 
 console.log(group.has(10))
