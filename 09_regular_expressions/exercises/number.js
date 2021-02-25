@@ -1,4 +1,5 @@
-const number = /^[+\-]?(\d(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/
+const numberRegex = /^[+\-]?(\d(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/
+
 
 for (let str of ["1", "-1", "+15", "1.55", ".5", "5.","1.3e2", "1E-4", "1e+12"]) {
     if (!number.test(str)) {
