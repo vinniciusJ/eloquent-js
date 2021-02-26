@@ -1,7 +1,7 @@
 function skipSpace(string){
-    let first = string.search(/\S/)
+    let skippable = string.match(/^(\s|#.*)*/)
 
-    return first == -1 ? '' : string.slice(first)
+    return string.slice(skippable[0].length)
 }
 
 function parseApply(expression, program){
@@ -124,6 +124,23 @@ specialForms['fun'] = (args, scope) => {
     }
 }
 
+specialForms['set'] = (args, env) => {
+    if (args.length != 2 || args[0].type != "word") throw new SyntaxError("Bad use of set")
+    
+    let varName = args[0].name
+
+    let value = evaluate(args[1], env)
+  
+    for (let scope = env; scope; scope = Object.getPrototypeOf(scope)) {
+      if (Object.prototype.hasOwnProperty.call(scope, varName)) {
+        scope[varName] = value
+        
+        return value
+      }
+    }
+    throw new ReferenceError(`Setting undefined variable ${varName}`)
+  }
+
 const topScope = Object.create(null)
 
 topScope['true'] = true
@@ -137,6 +154,12 @@ topScope['print'] = value => {
 
     return value
 }
+
+topScope['array'] = (...values) => values
+
+topScope['length'] = array => array.length
+
+topScope['element'] = (array, index) => array[index]
 
 function evaluate(expression, scope){
     if(expression.type == 'value'){
@@ -190,3 +213,28 @@ do(define(pow, fun(base, exp,
        *(base, pow(base, -(exp, 1)))))),
   print(pow(2, 10)))
 `)
+
+run(`
+do(define(sum, fun(array,
+     do(define(i, 0),
+        define(sum, 0),
+        while(<(i, length(array)),
+          do(define(sum, +(sum, element(array, i))),
+             define(i, +(i, 1)))),
+        sum))),
+   print(sum(array(1, 2, 3))))
+`)
+
+run(`
+do(define(f, fun(a, fun(b, +(a, b)))),
+   print(f(4)(5)))
+`)
+
+run(`
+do(define(x, 4),
+   define(setx, fun(val, set(x, val))),
+   setx(50),
+   print(x))
+`)
+
+run(`set(quux, true)`)
