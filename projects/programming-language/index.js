@@ -149,11 +149,7 @@ topScope['false'] = false
 for(let op of ['+', '-', '*', '/', '==', '<', '>'])
     topScope[op] = Function('a, b', `return a ${op} b`)
 
-topScope['print'] = value => {
-    console.log(value)
-
-    return value
-}
+topScope['print'] = value => value
 
 topScope['array'] = (...values) => values
 
