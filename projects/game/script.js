@@ -1,16 +1,6 @@
-import Level from './src/Level.js'
+import Controller from './src/Controller.js'
+import DOMDisplay from './src/DOMDisplay.js'
 
-const simpleLevelPlan = `
-......................
-..#................#..
-..#..............=.#..
-..#.........o.o....#..
-..#.@......#####...#..
-..#####............#..
-......#++++++++++++#..
-......##############..
-......................`
+import GAME_LEVELS from './src/data/levels.js'
 
-const simpleLevel = new Level({ plan: simpleLevelPlan })
-
-console.log(`${simpleLevel.width} by ${simpleLevel.height}`);
+Controller.runGame({ plans: GAME_LEVELS, Display: DOMDisplay })
